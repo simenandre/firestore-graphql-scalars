@@ -1,0 +1,1 @@
+# firestore-graphql-scalar
