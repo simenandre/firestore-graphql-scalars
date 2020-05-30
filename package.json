@@ -41,7 +41,7 @@
     "prebuild": "yarn clean",
     "lint": "eslint --ext .ts \"./src/**/*.ts\"",
     "build": "bob build --single",
-    "test": "jest --forceExit --no-watchman && yarn bundlesize",
+    "test": "jest --forceExit --no-watchman",
     "prepare-release": "yarn build && yarn test",
     "release": "yarn prepare-release && bob prepack && npm publish dist",
     "ci:release:canary": "node bump.js && bob prepack && npm publish dist --tag alpha --access public",
