@@ -6,6 +6,13 @@
     "type": "git",
     "url": "https://github.com/cobraz/firestore-graphql-scalars.git"
   },
+  "keywords": [
+    "firebase",
+    "firestore",
+    "graphql",
+    "graphql scalar",
+    "graphql-scalars"
+  ],
   "sideEffects": false,
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
