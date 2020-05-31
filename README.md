@@ -142,3 +142,6 @@ Released under the [MIT license](./LICENSE).
 Issues and Pull Requests are always welcome. ❤️
 
 ## Thanks
+
+This repository is a fork of [graphql-scalars](https://github.com/Urigo/graphql-scalars). It's inspired by [@lookfirst's issue](https://github.com/Urigo/graphql-scalars/issues/61) and
+[juicylevel/coffee-service](https://github.com/juicylevel/coffee-service). Big thanks to the contributors of these repositories! 🙏
