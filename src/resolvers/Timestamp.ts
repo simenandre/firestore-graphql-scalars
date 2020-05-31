@@ -8,8 +8,12 @@ export default new GraphQLScalarType({
 
   serialize(value) {
     let v = value;
+
+    console.log(typeof v);
     if (
       !(v instanceof Timestamp) &&
+      typeof v !== 'object' &&
+      typeof v.toDate === 'function' &&
       typeof v !== 'string' &&
       typeof v !== 'number'
     ) {
@@ -29,7 +33,7 @@ export default new GraphQLScalarType({
         throw new TypeError(`Value is not a valid Date: ${JSON.stringify(v)}`);
       }
     } else if (typeof v === 'number') {
-      v = Timestamp.fromDate(new Date(v));
+      v = Timestamp.fromMillis(v);
     }
 
     if (Number.isNaN(v.seconds)) {
