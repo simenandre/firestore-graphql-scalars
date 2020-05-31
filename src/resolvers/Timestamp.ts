@@ -9,7 +9,6 @@ export default new GraphQLScalarType({
   serialize(value) {
     let v = value;
 
-    console.log(typeof v);
     if (
       !(v instanceof Timestamp) &&
       typeof v !== 'object' &&
