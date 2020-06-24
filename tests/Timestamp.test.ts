@@ -31,7 +31,7 @@ describe('TimestampResolver', () => {
 
     test('parseValue', () => {
       const now = new Date();
-      expect(TimestampResolver.parseValue(now).toDate()).toEqual(now);
+      expect(TimestampResolver.parseValue(now)).toEqual(now);
     });
 
     test('parseLiteral', () => {
@@ -43,7 +43,7 @@ describe('TimestampResolver', () => {
             kind: Kind.STRING,
           },
           {},
-        ).toDate(),
+        ),
       ).toEqual(result);
 
       expect(
