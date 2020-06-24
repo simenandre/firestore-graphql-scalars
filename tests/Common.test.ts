@@ -5,8 +5,10 @@ import {
 } from '../src';
 import { mergeTypeDefs, mergeResolvers } from '@graphql-tools/merge';
 import { GraphQLSchema, graphql } from 'graphql';
+import { Timestamp } from '@google-cloud/firestore';
 
 const FOO = '2018-01-01T00:00:00.000Z';
+
 const fooQuery = /* GraphQL */ `
   type Query {
     foo: Timestamp
@@ -14,7 +16,7 @@ const fooQuery = /* GraphQL */ `
 `;
 const fooResolvers = {
   Query: {
-    foo: () => FOO,
+    foo: () => Timestamp.fromDate(new Date(FOO)),
   },
 };
 
@@ -37,6 +39,6 @@ describe('Common', () => {
       `,
     });
     expect(result.errors).toBeFalsy();
-    expect(result.data.foo).toBe(FOO);
+    expect(new Date(result.data.foo)).toStrictEqual(new Date(FOO));
   });
 });

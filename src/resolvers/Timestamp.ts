@@ -39,10 +39,10 @@ export default new GraphQLScalarType({
       throw new TypeError(`Value is not a valid Date: ${JSON.stringify(v)}`);
     }
 
-    return v.toDate().toJSON();
+    return v.toDate();
   },
 
-  parseValue(value: string): Date {
+  parseValue(value: string): Timestamp {
     const date = new Date(value);
 
     if (Number.isNaN(date.getTime())) {
@@ -51,7 +51,7 @@ export default new GraphQLScalarType({
       );
     }
 
-    return date;
+    return Timestamp.fromDate(date);
   },
 
   parseLiteral(ast: ValueNode) {

@@ -8,9 +8,7 @@ describe('TimestampResolver', () => {
   describe('valid', () => {
     test('serialize', () => {
       const now = new Date();
-      expect(TimestampResolver.serialize(Timestamp.fromDate(now))).toEqual(
-        now.toJSON(),
-      );
+      expect(TimestampResolver.serialize(Timestamp.fromDate(now))).toEqual(now);
     });
 
     test('serialize (String)', () => {
@@ -20,18 +18,18 @@ describe('TimestampResolver', () => {
 
       d2.setTime(d1);
 
-      expect(TimestampResolver.serialize(now)).toEqual(d2.toJSON());
+      expect(TimestampResolver.serialize(now)).toEqual(d2);
     });
 
     test('serialize (number)', () => {
       const now = new Date();
 
-      expect(TimestampResolver.serialize(now.getTime())).toEqual(now.toJSON());
+      expect(TimestampResolver.serialize(now.getTime())).toEqual(now);
     });
 
     test('parseValue', () => {
       const now = new Date();
-      expect(TimestampResolver.parseValue(now)).toEqual(now);
+      expect(TimestampResolver.parseValue(now).toDate()).toEqual(now);
     });
 
     test('parseLiteral', () => {
@@ -43,7 +41,7 @@ describe('TimestampResolver', () => {
             kind: Kind.STRING,
           },
           {},
-        ),
+        ).toDate(),
       ).toEqual(result);
 
       expect(
