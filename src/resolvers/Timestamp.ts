@@ -42,7 +42,7 @@ export default new GraphQLScalarType({
     return v.toDate().toJSON();
   },
 
-  parseValue(value: string): Timestamp {
+  parseValue(value: string): Date {
     const date = new Date(value);
 
     if (Number.isNaN(date.getTime())) {
@@ -51,7 +51,7 @@ export default new GraphQLScalarType({
       );
     }
 
-    return Timestamp.fromDate(date);
+    return date;
   },
 
   parseLiteral(ast: ValueNode) {
