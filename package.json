@@ -70,7 +70,7 @@
     "prettier": "2.0.5",
     "semver": "7.3.2",
     "ts-jest": "26.0.0",
-    "typescript": "3.9.3"
+    "typescript": "3.9.5"
   },
   "peerDependencies": {
     "@google-cloud/firestore": "3.x",
