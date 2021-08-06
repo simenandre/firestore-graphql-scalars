@@ -2,10 +2,6 @@
   "name": "firestore-graphql-scalars",
   "version": "2.0.0",
   "description": "Scalar types for Google Firestore.",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/cobraz/firestore-graphql-scalars.git"
-  },
   "keywords": [
     "firebase",
     "firestore",
@@ -13,39 +9,47 @@
     "graphql scalar",
     "graphql-scalars"
   ],
+  "repository": "github:cobraz/firestore-graphql-scalars",
+  "license": "MIT",
   "sideEffects": false,
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "typings": "dist/index.d.ts",
-  "typescript": {
-    "definition": "dist/index.d.ts"
-  },
-  "license": "MIT",
-  "jest": {
-    "roots": [
-      "src"
-    ]
+  "scripts": {
+    "clean": "rm -rf dist",
+    "prebuild": "yarn clean",
+    "build": "bob build --single",
+    "lint": "eslint --ext .ts \"./src/**/*.ts\"",
+    "test": "jest --forceExit --no-watchman",
+    "prepare-release": "yarn build && yarn test",
+    "release": "yarn prepare-release && bob prepack && npm publish dist",
+    "ci:release:canary": "node bump.js && bob prepack && npm publish dist --tag alpha --access public",
+    "bundlesize": "yarn build && cd bundle-test/ && yarn && yarn test"
   },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
     }
   },
-  "prettier": {
-    "singleQuote": true,
-    "trailingComma": "all",
-    "printWidth": 80
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.{js,json,css,md,ts,tsx}": [
+      "prettier --write",
+      "git add -f"
+    ]
   },
-  "scripts": {
-    "clean": "rm -rf dist",
-    "prebuild": "yarn clean",
-    "lint": "eslint --ext .ts \"./src/**/*.ts\"",
-    "build": "bob build --single",
-    "test": "jest --forceExit --no-watchman",
-    "prepare-release": "yarn build && yarn test",
-    "release": "yarn prepare-release && bob prepack && npm publish dist",
-    "ci:release:canary": "node bump.js && bob prepack && npm publish dist --tag alpha --access public",
-    "bundlesize": "yarn build && cd bundle-test/ && yarn && yarn test"
+  "prettier": {
+    "printWidth": 80,
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
+  "jest": {
+    "roots": [
+      "src"
+    ]
   },
   "devDependencies": {
     "@google-cloud/firestore": "4.9.2",
@@ -76,17 +80,10 @@
     "@google-cloud/firestore": "3.x",
     "graphql": "^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0"
   },
-  "lint-staged": {
-    "*.{ts,tsx}": [
-      "eslint --fix",
-      "git add"
-    ],
-    "*.{js,json,css,md,ts,tsx}": [
-      "prettier --write",
-      "git add -f"
-    ]
-  },
   "engines": {
     "node": ">=10"
+  },
+  "typescript": {
+    "definition": "dist/index.d.ts"
   }
 }
