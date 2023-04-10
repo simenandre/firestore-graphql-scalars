@@ -9,7 +9,7 @@
     "graphql scalar",
     "graphql-scalars"
   ],
-  "repository": "github:cobraz/firestore-graphql-scalars",
+  "repository": "github:simenandre/firestore-graphql-scalars",
   "license": "MIT",
   "sideEffects": false,
   "main": "dist/index.cjs.js",
