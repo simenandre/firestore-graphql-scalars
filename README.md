@@ -110,29 +110,6 @@ server.listen().then(({ url }) => {
 });
 ```
 
-### Usage with apollo-server-express and CommonJS imports
-
-```javascript
-const { ApolloServer } = require('apollo-server-express');
-// Import individual scalars and resolvers
-const {
-  TimestampResolver,
-  TimestampTypeDefinition,
-} = require('firestore-graphql-scalars');
-
-const server = new ApolloServer({
-  typeDefs: [TimestampTypeDefinition, ...yourTypeDefs],
-  resolvers: [
-    { Timestamp: TimestampResolver }, // <-- Notable difference here
-    ...yourResolvers,
-  ],
-});
-
-server.listen().then(({ url }) => {
-  console.log(`🚀 Server ready at ${url}`);
-});
-```
-
 ## License
 
 Released under the [MIT license](./LICENSE).

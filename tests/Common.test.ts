@@ -2,7 +2,7 @@ import { makeExecutableSchema } from '@graphql-tools/schema';
 import {
   typeDefs as scalarTypeDefs,
   resolvers as scalarResolvers,
-} from '../src';
+} from '../src/main';
 import { mergeTypeDefs, mergeResolvers } from '@graphql-tools/merge';
 import { GraphQLSchema, graphql } from 'graphql';
 import { Timestamp } from '@google-cloud/firestore';
@@ -39,6 +39,7 @@ describe('Common', () => {
       `,
     });
     expect(result.errors).toBeFalsy();
-    expect(new Date(result.data.foo)).toStrictEqual(new Date(FOO));
+    const date = result.data && result.data['foo'] as any;
+    expect(new Date(date)).toStrictEqual(new Date(FOO));
   });
 });

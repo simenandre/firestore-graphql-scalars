@@ -3,53 +3,33 @@ name: CI
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
-    branches:
-      - master
 
 jobs:
   test:
-    name: Testing on Node ${{matrix.node_version}}
+    name: Testing on Node LTS
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node_version: [10, 12, 13]
     steps:
-      - name: Checkout Master
-        uses: actions/checkout@v1
-      - name: Use Node ${{matrix.node_version}}
-        uses: actions/setup-node@master
-        with:
-          version: ${{ matrix.node_version }}
-      - name: Install Dependencies using Yarn
-        run: yarn install
-      - name: Lint
-        run: yarn lint
-      - name: Test
-        run: yarn test
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3
 
-  publish-canary:
-    name: Publish Canary
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Master
-        uses: actions/checkout@v1
-      - name: Use Node
-        uses: actions/setup-node@v1
+      - uses: pnpm/action-setup@v2
+
+      - name: Use Node LTS ✨
+        uses: actions/setup-node@v3
         with:
-          node-version: '13.x'
-      - name: Install Dependencies using Yarn
-        run: yarn install
-      - name: Build
-        run: yarn build
-      - name: Release Canary
-        run: |
-          echo "Source Repo: ${{github.repository}}"
-          if [ "${{github.repository}}" == "cobraz/firestore-graphql-scalars" ] && [ "${{ secrets.NODE_AUTH_TOKEN }}" != "" ]
-          then
-              echo "//registry.npmjs.org/:_authToken=${{ secrets.NODE_AUTH_TOKEN }}" > .npmrc
-              npm run ci:release:canary
-          else
-              echo "Skipping canary publish due to a fork/PR..."
-          fi
+          node-version: lts/*
+          cache: pnpm
+
+      - name: Install dependencies 📦️
+        run: pnpm install --frozen-lockfile
+
+      - name: Build 🔨
+        run: pnpm build
+
+      - name: Lint 💅
+        run: pnpm lint
+
+      - name: Test 🧪
+        run: yarn test --passWithNoTests

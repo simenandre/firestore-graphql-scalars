@@ -1,14 +1,12 @@
-/* global describe, test, expect */
-
 import { Kind } from 'graphql/language';
-import TimestampResolver from '../src/resolvers/Timestamp';
+import { timestampResolver } from '../src/main';
 import { Timestamp } from '@google-cloud/firestore';
 
-describe('TimestampResolver', () => {
+describe('timestampResolver', () => {
   describe('valid', () => {
     test('serialize', () => {
       const now = new Date();
-      expect(TimestampResolver.serialize(Timestamp.fromDate(now))).toEqual(now);
+      expect(timestampResolver.serialize(Timestamp.fromDate(now))).toEqual(now);
     });
 
     test('serialize (String)', () => {
@@ -18,24 +16,24 @@ describe('TimestampResolver', () => {
 
       d2.setTime(d1);
 
-      expect(TimestampResolver.serialize(now)).toEqual(d2);
+      expect(timestampResolver.serialize(now)).toEqual(d2);
     });
 
     test('serialize (number)', () => {
       const now = new Date();
 
-      expect(TimestampResolver.serialize(now.getTime())).toEqual(now);
+      expect(timestampResolver.serialize(now.getTime())).toEqual(now);
     });
 
     test('parseValue', () => {
       const now = new Date();
-      expect(TimestampResolver.parseValue(now).toDate()).toEqual(now);
+      expect(timestampResolver.parseValue(now).toDate()).toEqual(now);
     });
 
     test('parseLiteral', () => {
       const result = new Date(Date.UTC(2017, 0, 2, 3, 4, 5, 0));
       expect(
-        TimestampResolver.parseLiteral(
+        timestampResolver.parseLiteral(
           {
             value: '2017-01-02T03:04:05.000Z',
             kind: Kind.STRING,
@@ -45,7 +43,7 @@ describe('TimestampResolver', () => {
       ).toEqual(result);
 
       expect(
-        TimestampResolver.parseLiteral(
+        timestampResolver.parseLiteral(
           {
             value: result.getTime().toString(),
             kind: Kind.INT,
@@ -59,20 +57,20 @@ describe('TimestampResolver', () => {
   describe('invalid', () => {
     describe('not a valid date', () => {
       test('serialize', () => {
-        expect(() => TimestampResolver.serialize('this is not a date')).toThrow(
+        expect(() => timestampResolver.serialize('this is not a date')).toThrow(
           /Value is not a valid Date/,
         );
       });
 
       test('parseValue', () => {
         expect(() =>
-          TimestampResolver.parseValue('this is not a date'),
+          timestampResolver.parseValue('this is not a date'),
         ).toThrow(/Value is not a valid Date/);
       });
 
       test('parseLiteral', () => {
         expect(() =>
-          TimestampResolver.parseLiteral(
+          timestampResolver.parseLiteral(
             {
               value: 'this is not a date',
               kind: Kind.STRING,
