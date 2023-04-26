@@ -27,14 +27,14 @@ scalar Timestamp
 In your resolver map, first import them:
 
 ```javascript
-import { TimestampResolver } from 'firestore-graphql-scalars';
+import { timestampResolver } from 'firestore-graphql-scalars';
 ```
 
 Then make sure they're in the root resolver map like this:
 
 ```javascript
 const myResolverMap = {
-  Timestamp: TimestampResolver,
+  Timestamp: timestampResolver,
 
   Query: {
     // more stuff here
