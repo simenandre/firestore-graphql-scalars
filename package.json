@@ -13,7 +13,7 @@
   "license": "MIT",
   "module": "dist/main.js",
   "typings": "dist/main.d.ts",
-  "packageManager": "pnpm@8.3.1",
+  "packageManager": "pnpm@8.5.0",
   "prettier": "@cobraz/prettier",
   "scripts": {
     "build": "tsc",
