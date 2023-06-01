@@ -11,8 +11,8 @@
   ],
   "repository": "github:simenandre/firestore-graphql-scalars",
   "license": "MIT",
-  "module": "dist/main.js",
-  "typings": "dist/main.d.ts",
+  "module": "dist/src/main.js",
+  "typings": "dist/src/main.d.ts",
   "files": [
     "dist"
   ],
