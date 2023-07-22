@@ -1,9 +1,0 @@
-{
-  "extends": [
-    "@bjerk/eslint-config"
-  ],
-  "ignorePatterns": [
-    "dist",
-    "node_modules"
-  ]
-}
