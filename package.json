@@ -26,7 +26,7 @@
   "devDependencies": {
     "@bjerk/eslint-config": "^4.0.0",
     "@cobraz/prettier": "^2.0.1",
-    "@google-cloud/firestore": "^6.5.0",
+    "@google-cloud/firestore": "^7.0.0",
     "@graphql-tools/merge": "^9.0.0",
     "@graphql-tools/schema": "^10.0.0",
     "@types/jest": "^29.5.1",
@@ -42,7 +42,7 @@
     "typescript": "^5.0.4"
   },
   "peerDependencies": {
-    "@google-cloud/firestore": "^6.5.0",
+    "@google-cloud/firestore": "^7.0.0",
     "graphql": "^16.0.0"
   },
   "engines": {
